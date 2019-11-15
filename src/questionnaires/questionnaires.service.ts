@@ -10,7 +10,6 @@ import { QuestionnairesDao } from './dao/questionnairesDao';
 
 @Injectable()
 export class QuestionnairesService {
-  private _questionnaires: Questionnaire[];
 
   /**
    * Class constructor
@@ -18,7 +17,6 @@ export class QuestionnairesService {
    * @param {QuestionnairesDao} _questionnaireDao instance of the DAO
    */
   constructor(private readonly _questionnaireDao: QuestionnairesDao) {
-    this._questionnaires = QUESTIONNAIRES;
   }
 
   /**
