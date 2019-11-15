@@ -7,4 +7,9 @@ swagger:
   version: 1.0
   tag: api
   path: documentation
-
+mongodb:
+  uri: mongodb://0.0.0.0:27017/projetDB
+  options:
+    useNewUrlParser: true
+    useUnifiedTopology: true
+    useFindAndModify: false

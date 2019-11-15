@@ -10,8 +10,9 @@ export class QuestionnaireQuestionDto {
   title: string;
 
   @ApiModelPropertyOptional({ description: 'Choices' })
-  @IsInstance(QuestionnaireChoiceDto)
+  @IsInstance(QuestionnaireChoiceDto, {each: true})
   @Type(() => QuestionnaireChoiceDto)
+  @ValidateNested({ each: true })
   choices: QuestionnaireChoiceDto[];
 
   @ApiModelProperty({ description: 'Response', example: 'Response example' })
