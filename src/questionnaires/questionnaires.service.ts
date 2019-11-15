@@ -1,9 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Questionnaire } from './interfaces/questionnaire.interface';
 import { from, Observable, of, throwError } from 'rxjs';
-import { find, flatMap, map, tap } from 'rxjs/operators';
+import { find, findIndex, flatMap, map, tap } from 'rxjs/operators';
 import { QUESTIONNAIRES } from '../data/questionnaires';
 import { CreateQuestionnaireDto } from './dto/create-questionnaire.dto';
+import { UpdateQuestionnaireDto } from './dto/update-questionnaire.dto';
 
 @Injectable()
 export class QuestionnairesService {
@@ -60,6 +61,33 @@ export class QuestionnairesService {
           id: this._createId(),
         }) as Questionnaire ),
         tap(_ => this._questionnaires = this._questionnaires.concat(_)),
+      );
+  }
+
+  /**
+   * Update a questionnaire in questionnaires list
+   *
+   * @param {string} id of the questionnaire to update
+   * @param questionnaire data to update
+   *
+   * @returns {Observable<QuestionnaireEntity>}
+   */
+  update(id: string, questionnaire: UpdateQuestionnaireDto): Observable<Questionnaire> {
+    return this._findQuestionnaireIndexOfList(id)
+      .pipe(
+        tap(_ => Object.assign(this._questionnaires[ _ ], questionnaire)),
+        map(_ => this._questionnaires[ _ ]),
+      );
+  }
+
+  private _findQuestionnaireIndexOfList(id: string): Observable<number> {
+    return from(this._questionnaires)
+      .pipe(
+        findIndex(_ => _.id === id),
+        flatMap(_ => _ > -1 ?
+          of(_) :
+          throwError(new NotFoundException(`Questionnaire with id '${id}' not found`)),
+        ),
       );
   }
 
