@@ -12,5 +12,5 @@ export interface Question {
 }
 
 export interface Choice {
-  text: string;
+  choice: string;
 }

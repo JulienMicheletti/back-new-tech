@@ -13,6 +13,8 @@ import {
 import { QuestionnairesService } from './questionnaires.service';
 import { CreateQuestionnaireDto } from './dto/create-questionnaire.dto';
 import { UpdateQuestionnaireDto } from './dto/update-questionnaire.dto';
+import { HandlerParams } from './validators/handler-params';
+import { QuestionnaireEntity } from './entities/questionnaire.entity';
 
 @ApiUseTags('questionnaires')
 @Controller('questionnaires')
@@ -47,8 +49,8 @@ export class QuestionnairesController {
   @ApiBadRequestResponse({ description: 'Parameter provided is not good' })
   @ApiImplicitParam({ name: 'id', description: 'Unique identifier of the questionnaire in the database', type: String })
   @Get(':id')
-  findOne(@Param('id') id: string): Observable<Questionnaire | void > {
-    return this._questionnairesService.findOne(id);
+  findOne(@Param() params: HandlerParams): Observable<QuestionnaireEntity | void > {
+    return this._questionnairesService.findOne(params.id);
   }
 
   /**
@@ -62,7 +64,7 @@ export class QuestionnairesController {
   @ApiBadRequestResponse({ description: 'Payload provided is not good' })
   @ApiImplicitBody({ name: 'CreateQuestionnaireDto', description: 'Payload to create a new Questionnaire', type: CreateQuestionnaireDto })
   @Post()
-  create(@Body() createQuestionnaireDto: CreateQuestionnaireDto): Observable<Questionnaire> {
+  create(@Body() createQuestionnaireDto: CreateQuestionnaireDto): Observable<QuestionnaireEntity> {
     return this._questionnairesService.create(createQuestionnaireDto);
   }
 
@@ -81,8 +83,8 @@ export class QuestionnairesController {
   @ApiImplicitParam({ name: 'id', description: 'Unique identifier of the questionnaire in the database', type: String })
   @ApiImplicitBody({ name: 'UpdateQuestionnaireDto', description: 'Payload to update a questionnaire', type: UpdateQuestionnaireDto })
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateQuestionnaireDto: UpdateQuestionnaireDto): Observable<Questionnaire> {
-    return this._questionnairesService.update(id, updateQuestionnaireDto);
+  update(@Param() params: HandlerParams, @Body() updateQuestionnaireDto: UpdateQuestionnaireDto): Observable<QuestionnaireEntity> {
+    return this._questionnairesService.update(params.id, updateQuestionnaireDto);
   }
 
   /**
@@ -97,7 +99,7 @@ export class QuestionnairesController {
   @ApiBadRequestResponse({ description: 'Parameter provided is not good' })
   @ApiImplicitParam({ name: 'id', description: 'Unique identifier of the questionnaire in the database', type: String })
   @Delete(':id')
-  delete(@Param('id') id: string): Observable<void> {
-    return this._questionnairesService.delete(id);
+  delete(@Param() params: HandlerParams): Observable<void> {
+    return this._questionnairesService.delete(params.id);
   }
 }

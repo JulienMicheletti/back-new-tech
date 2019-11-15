@@ -5,5 +5,5 @@ export class QuestionnaireChoiceDto {
   @ApiModelProperty({ description: 'Choices given for a question', example: 'Choice example' })
   @IsString()
   @IsNotEmpty()
-  text: string;
+  choice: string;
 }

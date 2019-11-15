@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -13,6 +13,7 @@ async function bootstrap(config: AppConfig, swaggerConfig: SwaggerConfig) {
     new FastifyAdapter({ logger: true }),
   );
 
+  app.useGlobalPipes(new ValidationPipe());
   const options = new DocumentBuilder()
     .setTitle(swaggerConfig.title)
     .setDescription(swaggerConfig.description)

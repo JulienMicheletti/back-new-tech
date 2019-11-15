@@ -8,10 +8,10 @@ export const QUESTIONNAIRES = [
         title: 'Question facile',
         choices: [
           {
-            text: 'Réponse fausse',
+            choice: 'Réponse fausse',
           },
           {
-            text: 'Réponse juste',
+            choice: 'Réponse juste',
           },
         ],
         response: 'Réponse juste',
@@ -20,10 +20,10 @@ export const QUESTIONNAIRES = [
         title: 'Une autre question',
         choices: [
           {
-            text: 'Réponse fausse',
+            choice: 'Réponse fausse',
           },
           {
-            text: 'Réponse juste',
+            choice: 'Réponse juste',
           },
         ],
         response: 'Réponse juste',
@@ -39,10 +39,10 @@ export const QUESTIONNAIRES = [
         title: 'Question Difficile',
         choices: [
           {
-            text: 'Réponse fausse',
+            choice: 'Réponse fausse',
           },
           {
-            text: 'Réponse juste',
+            choice: 'Réponse juste',
           },
         ],
         response: 'Réponse juste',
@@ -51,10 +51,10 @@ export const QUESTIONNAIRES = [
       title: 'Une autre question',
       choices: [
         {
-          text: 'Réponse fausse',
+          choice: 'Réponse fausse',
         },
         {
-          text: 'Réponse juste',
+          choice: 'Réponse juste',
         },
       ],
       response: 'Réponse juste',

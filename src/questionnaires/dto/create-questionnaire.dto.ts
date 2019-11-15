@@ -15,7 +15,7 @@ export class CreateQuestionnaireDto {
   readonly category: string;
 
   @ApiModelProperty({ description: 'Questionnaire' })
-  @IsInstance(QuestionnaireQuestionDto)
+  @IsInstance(QuestionnaireQuestionDto, {each: true})
   @Type(() => QuestionnaireQuestionDto)
   readonly questionnaire: QuestionnaireQuestionDto[];
 }

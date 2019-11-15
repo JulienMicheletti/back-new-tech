@@ -8,17 +8,17 @@ export class UpdateQuestionnaireDto {
   @IsOptional()
   @IsString()
   @IsNotEmpty()
-  readonly level: string;
+  readonly level?: string;
 
   @ApiModelProperty({ description: 'Category', example: 'Animals' })
   @IsOptional()
   @IsString()
   @IsNotEmpty()
-  readonly category: string;
+  readonly category?: string;
 
   @ApiModelProperty({ description: 'Questionnaire' })
   @IsOptional()
-  @IsInstance(QuestionnaireQuestionDto)
+  @IsInstance(QuestionnaireQuestionDto, {each: true})
   @Type(() => QuestionnaireQuestionDto)
-  readonly questionnaire: QuestionnaireQuestionDto[];
+  readonly questionnaire?: QuestionnaireQuestionDto[];
 }

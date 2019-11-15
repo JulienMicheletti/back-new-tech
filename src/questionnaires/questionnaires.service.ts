@@ -5,6 +5,7 @@ import { find, findIndex, flatMap, map, tap } from 'rxjs/operators';
 import { QUESTIONNAIRES } from '../data/questionnaires';
 import { CreateQuestionnaireDto } from './dto/create-questionnaire.dto';
 import { UpdateQuestionnaireDto } from './dto/update-questionnaire.dto';
+import { QuestionnaireEntity } from './entities/questionnaire.entity';
 
 @Injectable()
 export class QuestionnairesService {
@@ -24,10 +25,10 @@ export class QuestionnairesService {
    *
    * @returns {Observable<QuestionnaireEntity[] | void>}
    */
-  findAll(): Observable<Questionnaire[] | void> {
+  findAll(): Observable<QuestionnaireEntity[] | void> {
     return of(this._questionnaires)
       .pipe(
-        map( _ => (!!_ && !!_.length) ? _ : undefined),
+        map( _ => (!!_ && !!_.length) ? _.map(__ => new QuestionnaireEntity(__)) : undefined),
       );
   }
 
@@ -38,14 +39,13 @@ export class QuestionnairesService {
    *
    * @returns {Observable<QuestionnaireEntity>}
    */
-  findOne(id: string): Observable<Questionnaire | void> {
+  findOne(id: string): Observable<QuestionnaireEntity> {
     return from(this._questionnaires)
       .pipe(
         find(_ => _.id === id),
-        flatMap(_ => !!_ ? of(_) : throwError(new NotFoundException('Questionnaire not found'))),
+        flatMap(_ => !!_ ? of(new QuestionnaireEntity(_)) : throwError(new NotFoundException('Questionnaire not found'))),
       );
   }
-
 
   /**
    * Add a questionnaire in questionnaires list
@@ -54,13 +54,14 @@ export class QuestionnairesService {
    *
    * @returns {Observable<QuestionnaireEntity>}
    */
-  create(questionnaire: CreateQuestionnaireDto): Observable<Questionnaire> {
+  create(questionnaire: CreateQuestionnaireDto): Observable<QuestionnaireEntity> {
     return of(questionnaire)
       .pipe(
         map( _ => Object.assign(_, {
           id: this._createId(),
         }) as Questionnaire ),
         tap(_ => this._questionnaires = this._questionnaires.concat(_)),
+        map(_ => new QuestionnaireEntity(_)),
       );
   }
 
