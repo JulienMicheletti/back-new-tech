@@ -9,10 +9,10 @@ export class CreateQuestionnaireDto {
   @IsNotEmpty()
   readonly level: string;
 
-  @ApiModelProperty({ description: 'Categorie', example: 'Animals' })
+  @ApiModelProperty({ description: 'Category', example: 'Animals' })
   @IsString()
   @IsNotEmpty()
-  readonly categorie: string;
+  readonly category: string;
 
   @ApiModelProperty({ description: 'Questionnaire' })
   @IsInstance(QuestionnaireQuestionDto)

@@ -2,7 +2,7 @@ export const QUESTIONNAIRES = [
   {
     id: '1',
     level: 'Facile',
-    categorie: 'Animaux',
+    category: 'Animaux',
     questionnaire: [
       {
         title: 'Question facile',
@@ -33,7 +33,7 @@ export const QUESTIONNAIRES = [
   {
     id: '2',
     level: 'Difficile',
-    categorie: 'Sport',
+    category: 'Sport',
     questionnaire: [
       {
         title: 'Question Difficile',

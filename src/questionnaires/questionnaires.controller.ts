@@ -16,8 +16,17 @@ import { CreateQuestionnaireDto } from './dto/create-questionnaire.dto';
 @ApiUseTags('questionnaires')
 @Controller('questionnaires')
 export class QuestionnairesController {
+  /**
+   * Class constructor
+   * @param _questionnairesService
+   */
+  constructor(private readonly _questionnairesService: QuestionnairesService) {}
 
-  constructor(private readonly _questionnairesService: QuestionnairesService){}
+  /**
+   * Handler to answer to GET /questionnaires route
+   *
+   * @returns Observable<QuestionnairesEntity[] | void>
+   */
   @ApiOkResponse({ description: 'Returns an array of questions', isArray: true })
   @ApiNoContentResponse({ description: 'No questions exists in database' })
   @Get()
@@ -25,6 +34,13 @@ export class QuestionnairesController {
     return this._questionnairesService.findAll();
   }
 
+  /**
+   * Handler to answer to GET /questionnaires/:id route
+   *
+   * @param {HandlerParams} params list of route params to take questionnaire id
+   *
+   * @returns Observable<QuestionnairesEntity>
+   */
   @ApiOkResponse({ description: 'Returns the questionnaire for the given "id"'})
   @ApiNotFoundResponse({ description: 'Questionnaire with the given "id" doesn\'t exist in the database' })
   @ApiBadRequestResponse({ description: 'Parameter provided is not good' })
@@ -34,6 +50,13 @@ export class QuestionnairesController {
     return this._questionnairesService.findOne(id);
   }
 
+  /**
+   * Handler to answer to POST /questionnaires route
+   *
+   * @param createQuestionnaireDto data to create
+   *
+   * @returns Observable<QuestionnairesEntity>
+   */
   @ApiCreatedResponse({ description: 'The Questionnaire has been successfully created'})
   @ApiBadRequestResponse({ description: 'Payload provided is not good' })
   @ApiImplicitBody({ name: 'CreateQuestionnaireDto', description: 'Payload to create a new Questionnaire', type: CreateQuestionnaireDto })

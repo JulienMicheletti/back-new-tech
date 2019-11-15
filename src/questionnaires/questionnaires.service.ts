@@ -7,13 +7,22 @@ import { CreateQuestionnaireDto } from './dto/create-questionnaire.dto';
 
 @Injectable()
 export class QuestionnairesService {
-  // tslint:disable-next-line:variable-name
   private _questionnaires: Questionnaire[];
 
+  /**
+   * Class constructor
+   *
+   * @param {QuestionnairesDao} _questionnaireDao instance of the DAO
+   */
   constructor() {
     this._questionnaires = QUESTIONNAIRES;
   }
 
+  /**
+   * Returns all existing questionnaires in the list
+   *
+   * @returns {Observable<QuestionnaireEntity[] | void>}
+   */
   findAll(): Observable<Questionnaire[] | void> {
     return of(this._questionnaires)
       .pipe(
@@ -21,6 +30,13 @@ export class QuestionnairesService {
       );
   }
 
+  /**
+   * Returns one questionnaire of the list matching id in parameter
+   *
+   * @param {string} id of the questionnaire
+   *
+   * @returns {Observable<QuestionnaireEntity>}
+   */
   findOne(id: string): Observable<Questionnaire | void> {
     return from(this._questionnaires)
       .pipe(
@@ -29,6 +45,14 @@ export class QuestionnairesService {
       );
   }
 
+
+  /**
+   * Add a questionnaire in questionnaires list
+   *
+   * @param questionnaire to create
+   *
+   * @returns {Observable<QuestionnaireEntity>}
+   */
   create(questionnaire: CreateQuestionnaireDto): Observable<Questionnaire> {
     return of(questionnaire)
       .pipe(

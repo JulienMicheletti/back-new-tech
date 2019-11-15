@@ -1,7 +1,7 @@
 export interface Questionnaire {
   id: string;
   level: string;
-  categorie: string;
+  category: string;
   questionnaire: Question[];
 }
 
