@@ -1,10 +1,10 @@
-export const Questionnaires = [
+export const QUESTIONNAIRES = [
   {
     id: '1',
+    level: 'Facile',
+    categorie: 'Animaux',
     questionnaire: [
       {
-        id: '1',
-        level: 'Facile',
         title: 'Question facile',
         choices: [
           {
@@ -17,8 +17,6 @@ export const Questionnaires = [
         response: 'Réponse juste',
       },
       {
-        id: '2',
-        level: 'Difficile',
         title: 'Une autre question',
         choices: [
           {
@@ -34,11 +32,11 @@ export const Questionnaires = [
   },
   {
     id: '2',
+    level: 'Difficile',
+    categorie: 'Sport',
     questionnaire: [
       {
-        id: '3',
-        level: 'Facile',
-        title: 'Question facile',
+        title: 'Question Difficile',
         choices: [
           {
             text: 'Réponse fausse',
@@ -50,8 +48,6 @@ export const Questionnaires = [
         response: 'Réponse juste',
       },
     {
-      id: '4',
-      level: 'Difficile',
       title: 'Une autre question',
       choices: [
         {

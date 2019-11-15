@@ -1,11 +1,11 @@
 export interface Questionnaire {
   id: string;
+  level: string;
+  categorie: string;
   questionnaire: Question[];
 }
 
 export interface Question {
-  id: string;
-  level: string;
   title: string;
   choices: Choice[];
   response: string;
