@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
 import { Question, Questionnaire } from './interfaces/questionnaire.interface';
 import { QUESTIONNAIRES } from '../data/questionnaires';
@@ -66,7 +66,6 @@ export class QuestionnairesController {
     return this._questionnairesService.create(createQuestionnaireDto);
   }
 
-
   /**
    * Handler to answer to PUT /questionnaire/:id route
    *
@@ -84,5 +83,21 @@ export class QuestionnairesController {
   @Put(':id')
   update(@Param('id') id: string, @Body() updateQuestionnaireDto: UpdateQuestionnaireDto): Observable<Questionnaire> {
     return this._questionnairesService.update(id, updateQuestionnaireDto);
+  }
+
+  /**
+   * Handler to answer to DELETE /questionnaire/:id route
+   *
+   * @param {string} id of the questionnaire to delete
+   *
+   * @returns Observable<void>
+   */
+  @ApiNoContentResponse({ description: 'The questionnaire has been successfully deleted' })
+  @ApiNotFoundResponse({ description: 'Questionnaire with the given "id" doesn\'t exist in the database' })
+  @ApiBadRequestResponse({ description: 'Parameter provided is not good' })
+  @ApiImplicitParam({ name: 'id', description: 'Unique identifier of the questionnaire in the database', type: String })
+  @Delete(':id')
+  delete(@Param('id') id: string): Observable<void> {
+    return this._questionnairesService.delete(id);
   }
 }

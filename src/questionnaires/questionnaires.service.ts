@@ -91,6 +91,21 @@ export class QuestionnairesService {
       );
   }
 
+  /**
+   * Deletes one questionnaire in people list
+   *
+   * @param {string} id of the questionnaire to delete
+   *
+   * @returns {Observable<void>}
+   */
+  delete(id: string): Observable<void> {
+    return this._findQuestionnaireIndexOfList(id)
+      .pipe(
+        tap(_ => this._questionnaires.splice(_, 1)),
+        map(() => undefined),
+      );
+  }
+
   private _createId(): string {
     return `${new Date().getTime()}`;
   }
