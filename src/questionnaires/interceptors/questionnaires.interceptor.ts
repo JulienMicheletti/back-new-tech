@@ -5,7 +5,7 @@ import { ServerResponse } from 'http';
 import { FastifyReply } from 'fastify';
 
 @Injectable()
-export class PeopleInterceptor implements NestInterceptor {
+export class QuestionnairesInterceptor implements NestInterceptor {
   /**
    * Class constructor
    * @param _logger

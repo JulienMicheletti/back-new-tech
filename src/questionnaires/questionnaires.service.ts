@@ -1,23 +1,22 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { Questionnaire } from './interfaces/questionnaire.interface';
 import { from, Observable, of, throwError } from 'rxjs';
-import { find, findIndex, flatMap, map, tap } from 'rxjs/operators';
+import { catchError, find, findIndex, flatMap, map, tap } from 'rxjs/operators';
 import { QUESTIONNAIRES } from '../data/questionnaires';
 import { CreateQuestionnaireDto } from './dto/create-questionnaire.dto';
 import { UpdateQuestionnaireDto } from './dto/update-questionnaire.dto';
 import { QuestionnaireEntity } from './entities/questionnaire.entity';
+import { QuestionnairesDao } from './dao/questionnairesDao';
 
 @Injectable()
 export class QuestionnairesService {
-  private _questionnaires: Questionnaire[];
 
   /**
    * Class constructor
    *
    * @param {QuestionnairesDao} _questionnaireDao instance of the DAO
    */
-  constructor() {
-    this._questionnaires = QUESTIONNAIRES;
+  constructor(private readonly _questionnaireDao: QuestionnairesDao) {
   }
 
   /**
@@ -26,7 +25,7 @@ export class QuestionnairesService {
    * @returns {Observable<QuestionnaireEntity[] | void>}
    */
   findAll(): Observable<QuestionnaireEntity[] | void> {
-    return of(this._questionnaires)
+    return this._questionnaireDao.find()
       .pipe(
         map( _ => (!!_ && !!_.length) ? _.map(__ => new QuestionnaireEntity(__)) : undefined),
       );
@@ -40,10 +39,14 @@ export class QuestionnairesService {
    * @returns {Observable<QuestionnaireEntity>}
    */
   findOne(id: string): Observable<QuestionnaireEntity> {
-    return from(this._questionnaires)
+    return this._questionnaireDao.findById(id)
       .pipe(
-        find(_ => _.id === id),
-        flatMap(_ => !!_ ? of(new QuestionnaireEntity(_)) : throwError(new NotFoundException('Questionnaire not found'))),
+        catchError(e => throwError(new UnprocessableEntityException(e.message))),
+        flatMap(_ =>
+          !!_ ?
+            of(new QuestionnaireEntity(_)) :
+            throwError(new NotFoundException(`Questionnaire with id '${id}' not found`)),
+        ),
       );
   }
 
@@ -57,10 +60,9 @@ export class QuestionnairesService {
   create(questionnaire: CreateQuestionnaireDto): Observable<QuestionnaireEntity> {
     return of(questionnaire)
       .pipe(
-        map( _ => Object.assign(_, {
-          id: this._createId(),
-        }) as Questionnaire ),
-        tap(_ => this._questionnaires = this._questionnaires.concat(_)),
+        flatMap(_ => this._questionnaireDao.create(_)),
+        catchError(e => throwError(new UnprocessableEntityException(e.message)),
+        ),
         map(_ => new QuestionnaireEntity(_)),
       );
   }
@@ -73,25 +75,18 @@ export class QuestionnairesService {
    *
    * @returns {Observable<QuestionnaireEntity>}
    */
-  update(id: string, questionnaire: UpdateQuestionnaireDto): Observable<Questionnaire> {
-    return this._findQuestionnaireIndexOfList(id)
+  update(id: string, questionnaire: UpdateQuestionnaireDto): Observable<QuestionnaireEntity> {
+    return this._questionnaireDao.findByIdAndUpdate(id, questionnaire)
       .pipe(
-        tap(_ => Object.assign(this._questionnaires[ _ ], questionnaire)),
-        map(_ => this._questionnaires[ _ ]),
-      );
-  }
-
-  private _findQuestionnaireIndexOfList(id: string): Observable<number> {
-    return from(this._questionnaires)
-      .pipe(
-        findIndex(_ => _.id === id),
-        flatMap(_ => _ > -1 ?
-          of(_) :
-          throwError(new NotFoundException(`Questionnaire with id '${id}' not found`)),
+        catchError(e => throwError(new UnprocessableEntityException(e.message)),
+          ),
+        flatMap(_ =>
+          !!_ ?
+            of(new QuestionnaireEntity((_))) :
+            throwError(new NotFoundException(`Questionnaire with id '${id}' not found`)),
         ),
       );
   }
-
   /**
    * Deletes one questionnaire in people list
    *
@@ -100,14 +95,14 @@ export class QuestionnairesService {
    * @returns {Observable<void>}
    */
   delete(id: string): Observable<void> {
-    return this._findQuestionnaireIndexOfList(id)
+    return this._questionnaireDao.findByIdAndRemove(id)
       .pipe(
-        tap(_ => this._questionnaires.splice(_, 1)),
-        map(() => undefined),
+        catchError(e => throwError(new NotFoundException(e.message))),
+        flatMap(_ =>
+          !!_ ?
+            of(undefined) :
+            throwError(new NotFoundException(`Questionnaire with id '${id}' not found`)),
+        ),
       );
-  }
-
-  private _createId(): string {
-    return `${new Date().getTime()}`;
   }
 }

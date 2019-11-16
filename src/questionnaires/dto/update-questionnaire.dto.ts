@@ -19,6 +19,7 @@ export class UpdateQuestionnaireDto {
   @ApiModelProperty({ description: 'Questionnaire' })
   @IsOptional()
   @IsInstance(QuestionnaireQuestionDto, {each: true})
+  @ValidateNested({ each: true })
   @Type(() => QuestionnaireQuestionDto)
   readonly questionnaire?: QuestionnaireQuestionDto[];
 }

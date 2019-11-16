@@ -6,6 +6,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppConfig } from './interfaces/app-config.interface';
 import { SwaggerConfig } from './interfaces/swagger-config.interface';
 import * as Config from 'config';
+import { QuestionnairesModule } from './questionnaires/questionnaires.module';
 
 async function bootstrap(config: AppConfig, swaggerConfig: SwaggerConfig) {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -15,7 +16,12 @@ async function bootstrap(config: AppConfig, swaggerConfig: SwaggerConfig) {
   app.setGlobalPrefix('api');
   app.enableCors();
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
   const options = new DocumentBuilder()
     .setTitle(swaggerConfig.title)
     .setDescription(swaggerConfig.description)
@@ -23,6 +29,9 @@ async function bootstrap(config: AppConfig, swaggerConfig: SwaggerConfig) {
     .addTag(swaggerConfig.tag)
     .build();
 
+  const questionnaireDocument = SwaggerModule.createDocument(app, options, {
+    include: [ QuestionnairesModule ],
+  });
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('documentation', app, document);
   await app.listen(3000);

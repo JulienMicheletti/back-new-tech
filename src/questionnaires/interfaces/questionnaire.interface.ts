@@ -1,4 +1,6 @@
-export interface Questionnaire {
+import { Document } from 'mongoose';
+
+export interface Questionnaire extends Document {
   id: string;
   level: string;
   category: string;
