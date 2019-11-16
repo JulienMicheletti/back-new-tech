@@ -12,6 +12,8 @@ async function bootstrap(config: AppConfig, swaggerConfig: SwaggerConfig) {
     AppModule,
     new FastifyAdapter({ logger: true }),
   );
+  app.setGlobalPrefix('api');
+  app.enableCors();
 
   app.useGlobalPipes(new ValidationPipe());
   const options = new DocumentBuilder()
