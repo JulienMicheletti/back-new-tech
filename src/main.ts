@@ -16,6 +16,7 @@ async function bootstrap(config: AppConfig, swaggerConfig: SwaggerConfig) {
   app.setGlobalPrefix('api');
   app.enableCors();
 
+  app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

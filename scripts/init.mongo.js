@@ -1,6 +1,7 @@
 db.getCollection('questionnaires').insertMany([
       {
         "level": "Facile",
+        "title": "test",
         "category": "Animaux",
         "questionnaire": [
           {

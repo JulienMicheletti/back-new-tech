@@ -4,6 +4,11 @@ import { IsInstance, IsNotEmpty, IsString, ValidateNested } from 'class-validato
 import { Type } from 'class-transformer';
 
 export class CreateQuestionnaireDto {
+  @ApiModelProperty({ description: 'Title', example: 'My awesome quiz' })
+  @IsString()
+  @IsNotEmpty()
+  readonly title: string;
+
   @ApiModelProperty({ description: 'Level', example: 'Easy' })
   @IsString()
   @IsNotEmpty()
