@@ -8,6 +8,7 @@ export class UpdateQuestionnaireDto {
   @IsString()
   @IsNotEmpty()
   readonly title?: string;
+
   @ApiModelProperty({ description: 'Level', example: 'Easy' })
   @IsOptional()
   @IsString()

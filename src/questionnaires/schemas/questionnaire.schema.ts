@@ -1,6 +1,11 @@
 import * as mongoose from 'mongoose';
 
 export const QuestionnaireSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   level: {
     type: String,
     required: true,

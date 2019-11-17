@@ -13,8 +13,6 @@ async function bootstrap(config: AppConfig, swaggerConfig: SwaggerConfig) {
     AppModule,
     new FastifyAdapter({ logger: true }),
   );
-  app.setGlobalPrefix('api');
-  app.enableCors();
 
   app.enableCors();
   app.useGlobalPipes(
