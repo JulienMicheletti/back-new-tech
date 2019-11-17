@@ -16,6 +16,7 @@ import { UpdateQuestionnaireDto } from './dto/update-questionnaire.dto';
 import { HandlerParams } from './validators/handler-params';
 import { QuestionnaireEntity } from './entities/questionnaire.entity';
 import { QuestionnairesInterceptor } from './interceptors/questionnaires.interceptor';
+import { HandlerParams2 } from './validators/handler-params2';
 
 @ApiUseTags('questionnaires')
 @Controller('questionnaires')
@@ -33,14 +34,23 @@ export class QuestionnairesController {
    *
    * @returns Observable<QuestionnairesEntity[] | void>
    */
-  @ApiOkResponse({ description: 'Returns an array of questions', isArray: true })
+  @ApiOkResponse({ description: 'Returns an array of questions', type: QuestionnaireEntity})
   @ApiNoContentResponse({ description: 'No questions exists in database' })
   @Get()
-  findAll(): Observable<Questionnaire[] | void> {
+  findAll(): Observable<QuestionnaireEntity[] | void> {
     // @ts-ignore
     return this._questionnairesService.findAll();
   }
 
+  @ApiOkResponse({ description: 'Returns the Questionnaire for the given "category"', type: QuestionnaireEntity })
+  @ApiNotFoundResponse({ description: 'Questionnaire with the given "id" doesn\'t exist in the database' })
+  @ApiBadRequestResponse({ description: 'Parameter provided is not good' })
+  @ApiUnprocessableEntityResponse({ description: 'The request can\'t be performed in the database' })
+  @ApiImplicitParam({ name: 'category', description: 'Unique identifier of the Questionnaire in the database', type: String })
+  @Get('category/:category')
+  findByCategory(@Param() params: HandlerParams2): Observable<QuestionnaireEntity[] | void > {
+    return this._questionnairesService.findByCategory(params.category);
+  }
   /**
    * Handler to answer to GET /questionnaires/:id route
    *

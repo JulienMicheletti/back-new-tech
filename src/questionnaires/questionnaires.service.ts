@@ -31,6 +31,13 @@ export class QuestionnairesService {
       );
   }
 
+  findByCategory(category: string): Observable<QuestionnaireEntity[] | void> {
+    return this._questionnaireDao.findByCategory(category)
+      .pipe(
+        map( _ => (!!_ && !!_.length) ? _.map(__ => new QuestionnaireEntity(__)) : undefined),
+      );
+  }
+
   /**
    * Returns one questionnaire of the list matching id in parameter
    *
