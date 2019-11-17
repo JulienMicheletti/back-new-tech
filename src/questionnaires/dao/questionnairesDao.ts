@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { InjectModel, MongooseModule } from '@nestjs/mongoose';
 import { Model, MongooseDocument } from 'mongoose';
 import { from, Observable } from 'rxjs';
 import { Questionnaire } from '../interfaces/questionnaire.interface';
 import { map } from 'rxjs/operators';
 import { CreateQuestionnaireDto } from '../dto/create-questionnaire.dto';
 import { UpdateQuestionnaireDto } from '../dto/update-questionnaire.dto';
+import { QuestionnaireSchema } from '../schemas/questionnaire.schema';
 
 @Injectable()
 export class QuestionnairesDao {
@@ -19,6 +20,13 @@ export class QuestionnairesDao {
    */
   find(): Observable<Questionnaire[] | void> {
     return from(this._questionnaireModel.find({}))
+      .pipe(
+        map((docs: MongooseDocument[]) => (!!docs && docs.length > 0) ? docs.map(_ => _.toJSON()) : undefined),
+      );
+  }
+
+  findByCategory(category: string): Observable<Questionnaire[] | void> {
+    return from(this._questionnaireModel.find({category: category}))
       .pipe(
         map((docs: MongooseDocument[]) => (!!docs && docs.length > 0) ? docs.map(_ => _.toJSON()) : undefined),
       );
