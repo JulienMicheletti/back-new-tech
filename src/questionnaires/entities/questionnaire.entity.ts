@@ -9,6 +9,10 @@ export class QuestionnaireEntity {
 
   @Expose()
   @Type(() => String)
+  title: string;
+
+  @Expose()
+  @Type(() => String)
   level: string;
 
   @Expose()

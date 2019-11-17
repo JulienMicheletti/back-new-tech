@@ -4,6 +4,10 @@ import { IsInstance, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'cl
 import { Type } from 'class-transformer';
 
 export class UpdateQuestionnaireDto {
+  @ApiModelProperty({ description: 'Title', example: 'My awesome quiz' })
+  @IsString()
+  @IsNotEmpty()
+  readonly title?: string;
   @ApiModelProperty({ description: 'Level', example: 'Easy' })
   @IsOptional()
   @IsString()

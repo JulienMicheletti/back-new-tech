@@ -2,6 +2,7 @@ import { Document } from 'mongoose';
 
 export interface Questionnaire extends Document {
   id: string;
+  title: string;
   level: string;
   category: string;
   questionnaire: Question[];
