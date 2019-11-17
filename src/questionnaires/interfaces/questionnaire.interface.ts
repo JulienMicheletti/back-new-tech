@@ -5,9 +5,14 @@ export interface Questionnaire extends Document {
   title: string;
   level: string;
   category: string;
+  players?: Joueur[];
   questionnaire: Question[];
 }
 
+export interface Joueur {
+  pseudo: string;
+  score: number;
+}
 export interface Question {
   title: string;
   choices: Choice[];

@@ -16,6 +16,18 @@ export const QuestionnaireSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  players: [{
+    pseudo: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    score: {
+      type: Number,
+      required: true,
+      trim: true,
+    },
+  }],
   questionnaire: [{
     title: {
       type: String,

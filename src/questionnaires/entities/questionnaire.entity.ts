@@ -1,5 +1,6 @@
 import { Exclude, Expose, Type } from 'class-transformer';
 import { QuestionnaireQuestionEntity } from './questionnaire-question.entity';
+import { QuestionnairePlayersEntity } from './questionnaire-players.entity';
 
 @Exclude()
 export class QuestionnaireEntity {
@@ -23,6 +24,9 @@ export class QuestionnaireEntity {
   @Type(() => QuestionnaireQuestionEntity)
   questionnaire: QuestionnaireQuestionEntity[];
 
+  @Expose()
+  @Type(() => QuestionnairePlayersEntity)
+  players: QuestionnairePlayersEntity[];
   /**
    * Class constructor
    *
