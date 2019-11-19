@@ -28,48 +28,39 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+# Quizzynon (Back-end)
 
-```bash
-$ npm install
-```
+## Prérequis
 
-## Running the app
+Installer NodeJs.
 
-```bash
-# development
-$ npm run start
+#### Sous Ubuntu 
+ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+ sudo apt-get install -y nodejs
+ 
+#### Sous Debian, en tant que root
+curl -sL https://deb.nodesource.com/setup_12.x | bash -
+apt-get install -y nodejs
 
-# watch mode
-$ npm run start:dev
+#### Sous MacOS
+brew install node
 
-# production mode
-$ npm run start:prod
-```
+## Mise en place
 
-## Test
+- `git clone https://github.com/JulienMicheletti/back-new-tech`
 
-```bash
-# unit tests
-$ npm run test
+- `npm install -g npm@latest`
 
-# e2e tests
-$ npm run test:e2e
+- `npm install -g yarn`
 
-# test coverage
-$ npm run test:cov
-```
+- `yarn global add @angular/cli`
 
-## Support
+- Se rendre dans le dossier racine du projet front-end
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- `ng config –global cli.packageManager yarn`
 
-## Stay in touch
+- `yarn install`
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Lancement du projet 
 
-## License
-
-  Nest is [MIT licensed](LICENSE).
+- `yarn run start`
