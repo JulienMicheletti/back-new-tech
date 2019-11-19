@@ -38,7 +38,6 @@ export class QuestionnairesController {
   @ApiNoContentResponse({ description: 'No questions exists in database' })
   @Get()
   findAll(): Observable<QuestionnaireEntity[] | void> {
-    // @ts-ignore
     return this._questionnairesService.findAll();
   }
 

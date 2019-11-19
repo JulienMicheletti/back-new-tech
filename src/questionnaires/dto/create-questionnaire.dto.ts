@@ -3,6 +3,7 @@ import { ApiModelProperty } from '@nestjs/swagger';
 import { IsInstance, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { QuestionnairePlayersDto } from './questionnaire-players.dto';
+import { type } from 'os';
 
 export class CreateQuestionnaireDto {
   @ApiModelProperty({ description: 'Title', example: 'My awesome quiz' })
@@ -20,13 +21,15 @@ export class CreateQuestionnaireDto {
   @IsNotEmpty()
   readonly category: string;
 
-  @ApiModelProperty({ description: 'Questionnaire' })
+  @ApiModelProperty({ description: 'Questionnaire' , type: [QuestionnaireQuestionDto]})
   @IsInstance(QuestionnaireQuestionDto, {each: true})
+  @ValidateNested({ each: true })
   @Type(() => QuestionnaireQuestionDto)
   readonly questionnaire: QuestionnaireQuestionDto[];
 
-  @ApiModelProperty({ description: 'Players' })
+  @ApiModelProperty({ description: 'Players', type: [QuestionnairePlayersDto] })
   @IsInstance(QuestionnairePlayersDto, {each: true})
+  @ValidateNested({ each: true })
   @Type(() => QuestionnairePlayersDto)
   readonly players: QuestionnairePlayersDto[];
 }
