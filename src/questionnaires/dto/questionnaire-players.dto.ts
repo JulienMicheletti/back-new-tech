@@ -9,7 +9,7 @@ export class QuestionnairePlayersDto {
   @IsNotEmpty()
   pseudo: string;
 
-  @ApiModelProperty({ description: 'score', example: '100' })
+  @ApiModelProperty({ description: 'score', example: 100 })
   @IsNumber()
   @IsNotEmpty()
   score: number;

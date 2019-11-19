@@ -8,6 +8,7 @@ export class UpdateQuestionnaireDto {
   @ApiModelProperty({ description: 'Title', example: 'My awesome quiz' })
   @IsString()
   @IsNotEmpty()
+  @IsOptional()
   readonly title?: string;
 
   @ApiModelProperty({ description: 'Level', example: 'Easy' })
@@ -22,14 +23,14 @@ export class UpdateQuestionnaireDto {
   @IsNotEmpty()
   readonly category?: string;
 
-  @ApiModelProperty({ description: 'Players' })
+  @ApiModelProperty({ description: 'Players' , type: [QuestionnairePlayersDto] })
   @IsOptional()
   @IsInstance(QuestionnairePlayersDto, {each: true})
   @ValidateNested({ each: true })
   @Type(() => QuestionnairePlayersDto)
   readonly players?: QuestionnairePlayersDto[];
 
-  @ApiModelProperty({ description: 'Questionnaire' })
+  @ApiModelProperty({ description: 'Questionnaire', type: [QuestionnaireQuestionDto] })
   @IsOptional()
   @IsInstance(QuestionnaireQuestionDto, {each: true})
   @ValidateNested({ each: true })
