@@ -5,6 +5,12 @@ import { Type } from 'class-transformer';
 import { QuestionnairePlayersDto } from './questionnaire-players.dto';
 
 export class UpdateQuestionnaireDto {
+  @ApiModelProperty({ description: 'id', example: '76545re43R' })
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  readonly id?: string;
+
   @ApiModelProperty({ description: 'Title', example: 'My awesome quiz' })
   @IsString()
   @IsNotEmpty()

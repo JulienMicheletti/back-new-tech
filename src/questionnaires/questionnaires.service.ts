@@ -113,25 +113,4 @@ export class QuestionnairesService {
         ),
       );
   }
-
-  /**
-   * Add a questionnaire in questionnaires list
-   *
-   * @param player to create
-   *
-   * @returns {Observable<QuestionnaireEntity>}
-   */
-  addPlayer(id: string, player: QuestionnairePlayersDto): Observable<QuestionnaireEntity> {
-    return this._questionnaireDao.findById(id)
-      .pipe(
-        catchError(e => throwError(new UnprocessableEntityException(e.message)),
-        ),
-        flatMap(_ =>
-          !!_ ?
-            of(new QuestionnaireEntity((_)).addPlayer(player)) :
-            throwError(new NotFoundException(`Questionnaire with id '${id}' not found`)),
-        ),
-      );
-  }
-
 }
