@@ -7,6 +7,7 @@ import { CreateQuestionnaireDto } from './dto/create-questionnaire.dto';
 import { UpdateQuestionnaireDto } from './dto/update-questionnaire.dto';
 import { QuestionnaireEntity } from './entities/questionnaire.entity';
 import { QuestionnairesDao } from './dao/questionnairesDao';
+import { QuestionnairePlayersDto } from './dto/questionnaire-players.dto';
 
 @Injectable()
 export class QuestionnairesService {
@@ -112,4 +113,25 @@ export class QuestionnairesService {
         ),
       );
   }
+
+  /**
+   * Add a questionnaire in questionnaires list
+   *
+   * @param player to create
+   *
+   * @returns {Observable<QuestionnaireEntity>}
+   */
+  addPlayer(id: string, player: QuestionnairePlayersDto): Observable<QuestionnaireEntity> {
+    return this._questionnaireDao.findById(id)
+      .pipe(
+        catchError(e => throwError(new UnprocessableEntityException(e.message)),
+        ),
+        flatMap(_ =>
+          !!_ ?
+            of(new QuestionnaireEntity((_)).addPlayer(player)) :
+            throwError(new NotFoundException(`Questionnaire with id '${id}' not found`)),
+        ),
+      );
+  }
+
 }

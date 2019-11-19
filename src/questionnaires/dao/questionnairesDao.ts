@@ -88,4 +88,17 @@ export class QuestionnairesDao {
         map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined),
       );
   }
+
+  /**
+   * Ajoute un player dans le quizz
+   *
+   * @return {Observable<CreateQuestionnairedDto>}
+   * @param person
+   */
+  addPlayer(person: CreateQuestionnaireDto): Observable<Questionnaire> {
+    return from(this._questionnaireModel.create(person))
+      .pipe(
+        map((doc: MongooseDocument) => doc.toJSON()),
+      );
+  }
 }

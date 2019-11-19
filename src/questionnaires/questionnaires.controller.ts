@@ -17,6 +17,7 @@ import { HandlerParams } from './validators/handler-params';
 import { QuestionnaireEntity } from './entities/questionnaire.entity';
 import { QuestionnairesInterceptor } from './interceptors/questionnaires.interceptor';
 import { HandlerParams2 } from './validators/handler-params2';
+import { QuestionnairePlayersDto } from './dto/questionnaire-players.dto';
 
 @ApiUseTags('questionnaires')
 @Controller('questionnaires')
@@ -119,5 +120,24 @@ export class QuestionnairesController {
   @Delete(':id')
   delete(@Param() params: HandlerParams): Observable<void> {
     return this._questionnairesService.delete(params.id);
+  }
+
+
+  /**
+   * Handler to answer to PUT /questionnaire/:id route
+   *
+   * @param {HandlerParams} params list of route params to take Questionnaire id
+   * @param updateQuestionnaireDto data to update
+   *
+   * @returns Observable<QuestionnaireEntity>
+   */
+  @ApiOkResponse({ description: 'The player has been successfully updated', type: QuestionnaireEntity })
+  @ApiNotFoundResponse({ description: 'Questionnaire with the given "id" doesn\'t exist in the database' })
+  @ApiBadRequestResponse({ description: 'Parameter and/or payload provided are not good' })
+  @ApiUnprocessableEntityResponse({ description: 'The request can\'t be performed in the database' })
+  @ApiImplicitParam({ name: 'id', description: 'Unique identifier of the Questionnaire in the database', type: String })
+  @Put('addPlayer/:id')
+  addPlayer(@Param() params: HandlerParams, @Body() playerDto: QuestionnairePlayersDto): Observable<QuestionnaireEntity> {
+    return this._questionnairesService.addPlayer(params.id, playerDto);
   }
 }

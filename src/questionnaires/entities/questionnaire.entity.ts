@@ -35,4 +35,9 @@ export class QuestionnaireEntity {
   constructor(partial: Partial<QuestionnaireEntity>) {
     Object.assign(this, partial);
   }
+
+  addPlayer(player: QuestionnairePlayersEntity): QuestionnaireEntity {
+    this.players.push(player);
+    return this;
+  }
 }
