@@ -96,7 +96,7 @@ export class QuestionnairesService {
       );
   }
   /**
-   * Deletes one questionnaire in people list
+   * Deletes one questionnaire in questionnaires list
    *
    * @param {string} id of the questionnaire to delete
    *

@@ -51,32 +51,32 @@ export class QuestionnairesDao {
    *
    *
    * @return {Observable<CreateQuestionnairedDto>}
-   * @param person
+   * @param questionnaire
    */
-  create(person: CreateQuestionnaireDto): Observable<Questionnaire> {
-    return from(this._questionnaireModel.create(person))
+  create(questionnaire: CreateQuestionnaireDto): Observable<Questionnaire> {
+    return from(this._questionnaireModel.create(questionnaire))
       .pipe(
         map((doc: MongooseDocument) => doc.toJSON()),
       );
   }
 
   /**
-   * Update a person in people list
+   * Update a questionnaire in questionnaires list
    *
    * @param {string} id
-   * @param {UpdateQuestionnaireDto} person
+   * @param {UpdateQuestionnaireDto} questionnaire
    *
    * @return {Observable<Questionnaire | void>}
    */
-  findByIdAndUpdate(id: string, person: UpdateQuestionnaireDto): Observable<Questionnaire | void> {
-    return from(this._questionnaireModel.findByIdAndUpdate(id, person, { new: true }))
+  findByIdAndUpdate(id: string, questionnaire: UpdateQuestionnaireDto): Observable<Questionnaire | void> {
+    return from(this._questionnaireModel.findByIdAndUpdate(id, questionnaire, { new: true }))
       .pipe(
         map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined),
       );
   }
 
   /**
-   * Delete a person in people list
+   * Delete a questionnaire in questionnaires list
    *
    * @param {string} id
    *
@@ -93,10 +93,10 @@ export class QuestionnairesDao {
    * Ajoute un player dans le quizz
    *
    * @return {Observable<CreateQuestionnairedDto>}
-   * @param person
+   * @param questionnaire
    */
-  addPlayer(person: CreateQuestionnaireDto): Observable<Questionnaire> {
-    return from(this._questionnaireModel.create(person))
+  addPlayer(questionnaire: CreateQuestionnaireDto): Observable<Questionnaire> {
+    return from(this._questionnaireModel.create(questionnaire))
       .pipe(
         map((doc: MongooseDocument) => doc.toJSON()),
       );
