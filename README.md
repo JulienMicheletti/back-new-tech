@@ -34,10 +34,6 @@
 
 Installer NodeJs
 
-Installer MongoDB
-
-Installer Robo 3T
-
 #### Sous Ubuntu 
  curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
  sudo apt-get install -y nodejs
@@ -48,6 +44,10 @@ apt-get install -y nodejs
 
 #### Sous MacOS
 brew install node
+
+Installer MongoDB
+
+Installer Robo 3T
 
 ## Mise en place de l'application
 
@@ -75,7 +75,7 @@ brew install node
 
 - Insérer les données initiales dans la collection "questionnaires"
 
-  - Utiliser le script fourni dans le projet (../script/init.mongojs
+  - Utiliser le script fourni dans le projet (../script/init.mongo.js)
 
 ## Lancement du projet 
 
