@@ -60,7 +60,7 @@ Installer [Robo 3T](https://robomongo.org/)
 
 - Créer une nouvelle base de données et l'appeler "projetDB"
 
-- Insérer les données initiales dans la collection "questionnaires"
+- Insérer les données initiales dans la base de données
 
   - Utiliser le script fourni dans le projet (../script/init.mongo.js)
 
