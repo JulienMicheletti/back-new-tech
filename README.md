@@ -32,7 +32,11 @@
 
 ## Prérequis
 
-Installer NodeJs.
+Installer NodeJs
+
+Installer MongoDB
+
+Installer Robo 3T
 
 #### Sous Ubuntu 
  curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
@@ -45,7 +49,7 @@ apt-get install -y nodejs
 #### Sous MacOS
 brew install node
 
-## Mise en place
+## Mise en place de l'application
 
 - `git clone https://github.com/JulienMicheletti/back-new-tech`
 
@@ -53,13 +57,25 @@ brew install node
 
 - `npm install -g yarn`
 
-- `yarn global add @angular/cli`
+- `yarn global add @nestjs/cli`
 
 - Se rendre dans le dossier racine du projet front-end
 
 - `ng config –global cli.packageManager yarn`
 
 - `yarn install`
+
+## Création et connexion de la base de données
+
+- Lancer Robo 3T et se connecter à la database MongoDB
+
+- Créer une nouvelle base de données et l'appeler "projetDB"
+
+- Créer une collection "questionnaires"
+
+- Insérer les données initiales dans la collection "questionnaires"
+
+  - Utiliser le script fourni dans le projet (../script/init.mongojs
 
 ## Lancement du projet 
 
