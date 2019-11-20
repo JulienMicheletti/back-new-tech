@@ -28,26 +28,17 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+Front-end: https://github.com/JulienMicheletti/front-new-tech
+
 # Quizzynon (Back-end)
 
 ## Prérequis
 
-Installer NodeJs
+Installer [NodeJs](https://nodejs.org/en/)
 
-#### Sous Ubuntu 
- curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
- sudo apt-get install -y nodejs
- 
-#### Sous Debian, en tant que root
-curl -sL https://deb.nodesource.com/setup_12.x | bash -
-apt-get install -y nodejs
+Installer [MongoDB](https://www.mongodb.com/fr)
 
-#### Sous MacOS
-brew install node
-
-Installer MongoDB
-
-Installer Robo 3T
+Installer [Robo 3T](https://robomongo.org/)
 
 ## Mise en place de l'application
 
@@ -61,8 +52,6 @@ Installer Robo 3T
 
 - Se rendre dans le dossier racine du projet front-end
 
-- `ng config –global cli.packageManager yarn`
-
 - `yarn install`
 
 ## Création et connexion de la base de données
@@ -70,8 +59,6 @@ Installer Robo 3T
 - Lancer Robo 3T et se connecter à la database MongoDB
 
 - Créer une nouvelle base de données et l'appeler "projetDB"
-
-- Créer une collection "questionnaires"
 
 - Insérer les données initiales dans la collection "questionnaires"
 
