@@ -28,48 +28,42 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+Front-end: https://github.com/JulienMicheletti/front-new-tech
 
-```bash
-$ npm install
-```
+# Quizzynon (Back-end)
 
-## Running the app
+## Prérequis
 
-```bash
-# development
-$ npm run start
+Installer [NodeJs](https://nodejs.org/en/)
 
-# watch mode
-$ npm run start:dev
+Installer [MongoDB](https://www.mongodb.com/fr)
 
-# production mode
-$ npm run start:prod
-```
+Installer [Robo 3T](https://robomongo.org/)
 
-## Test
+## Mise en place de l'application
 
-```bash
-# unit tests
-$ npm run test
+- `git clone https://github.com/JulienMicheletti/back-new-tech`
 
-# e2e tests
-$ npm run test:e2e
+- `npm install -g npm@latest`
 
-# test coverage
-$ npm run test:cov
-```
+- `npm install -g yarn`
 
-## Support
+- `yarn global add @nestjs/cli`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- Se rendre dans le dossier racine du projet front-end
 
-## Stay in touch
+- `yarn install`
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Création et connexion de la base de données
 
-## License
+- Lancer Robo 3T et se connecter à la database MongoDB
 
-  Nest is [MIT licensed](LICENSE).
+- Créer une nouvelle base de données et l'appeler "projetDB"
+
+- Insérer les données initiales dans la base de données
+
+  - Utiliser le script fourni dans le projet (../script/init.mongo.js)
+
+## Lancement du projet 
+
+- `yarn run start`
