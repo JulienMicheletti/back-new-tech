@@ -58,7 +58,7 @@ Installer [Robo 3T](https://robomongo.org/)
 
 - Lancer Robo 3T et se connecter à la database MongoDB
 
-- Créer une nouvelle base de données et l'appeler "projetDB"
+- Créer une nouvelle base de données et l'appeler "quizzynonDB"
 
 - Insérer les données initiales dans la base de données
 
