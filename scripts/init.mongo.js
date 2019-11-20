@@ -1096,6 +1096,3 @@ db.getCollection('questionnaires').insertMany([
     "players" : []
   }
 ]);
-
-// display the final initial data
-db.getCollection('questionnaires').find({});
